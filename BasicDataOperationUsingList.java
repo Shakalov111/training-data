@@ -3,7 +3,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.float;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,20 +11,20 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Клас BasicDataOperationUsingList надає методи для виконання основних операцiй з даними типу LocalDateTime.
+ * Клас BasicDataOperationUsingList надає методи для виконання основних операцiй з даними типу float.
  * 
- * <p>Цей клас зчитує данi з файлу "list/LocalDateTime.data", сортує їх та виконує пошук значення в масивi та списку.</p>
+ * <p>Цей клас зчитує данi з файлу "list/float.data", сортує їх та виконує пошук значення в масивi та списку.</p>
  * 
  * <p>Основнi методи:</p>
  * <ul>
  *   <li>{@link #main(String[])} - Точка входу в програму.</li>
  *   <li>{@link #doDataOperation()} - Виконує основнi операцiї з даними.</li>
- *   <li>{@link #sortArray()} - Сортує масив LocalDateTime.</li>
- *   <li>{@link #searchArray()} - Виконує пошук значення в масивi LocalDateTime.</li>
- *   <li>{@link #findMinAndMaxInArray()} - Знаходить мiнiмальне та максимальне значення в масивi LocalDateTime.</li>
- *   <li>{@link #sortList()} - Сортує список LocalDateTime.</li>
- *   <li>{@link #searchList()} - Виконує пошук значення в списку LocalDateTime.</li>
- *   <li>{@link #findMinAndMaxInList()} - Знаходить мiнiмальне та максимальне значення в списку LocalDateTime.</li>
+ *   <li>{@link #sortArray()} - Сортує масив float.</li>
+ *   <li>{@link #searchArray()} - Виконує пошук значення в масивi float.</li>
+ *   <li>{@link #findMinAndMaxInArray()} - Знаходить мiнiмальне та максимальне значення в масивi float.</li>
+ *   <li>{@link #sortList()} - Сортує список float.</li>
+ *   <li>{@link #searchList()} - Виконує пошук значення в списку float.</li>
+ *   <li>{@link #findMinAndMaxInList()} - Знаходить мiнiмальне та максимальне значення в списку float.</li>
  * </ul>
  * 
  * <p>Конструктор:</p>
@@ -39,9 +39,9 @@ import java.util.List;
  * 
  * <p>Змiннi екземпляра:</p>
  * <ul>
- *   <li>{@link #dataTimeValueToSearch} - Значення LocalDateTime для пошуку.</li>
- *   <li>{@link #dataTimeArray} - Масив LocalDateTime.</li>
- *   <li>{@link #dataTimeList} - Список LocalDateTime.</li>
+ *   <li>{@link #dataFloatValueToSearch} - Значення float для пошуку.</li>
+ *   <li>{@link #dataFloatArray} - Масив float.</li>
+ *   <li>{@link #dataFloatList} - Список float.</li>
  * </ul>
  * 
  * <p>Приклад використання:</p>
@@ -52,11 +52,11 @@ import java.util.List;
  * </pre>
  */
 public class BasicDataOperationUsingList {
-    static final String PATH_TO_DATA_FILE = "list/LocalDateTime.data";
+    static final String PATH_TO_DATA_FILE = "list/float.data";
 
-    LocalDateTime dataTimeValueToSearch;
-    LocalDateTime[] dataTimeArray;
-    List<LocalDateTime> dataTimeList;
+    float dataFloatValueToSearch;
+    float[] dataFloatArray;
+    List<Float> dataFloatList;
 
     public static void main(String[] args) {  
         BasicDataOperationUsingList basicDataOperationUsingList = new BasicDataOperationUsingList(args);
@@ -74,16 +74,16 @@ public class BasicDataOperationUsingList {
         }
 
         String searchValue = args[0];
-        dataTimeValueToSearch = LocalDateTime.parse(searchValue, DateTimeFormatter.ISO_DATE_TIME);
+        dataFloatValueToSearch = Float.parseFloat(searchValue);
 
-        dataTimeArray = Utils.readArrayFromFile(PATH_TO_DATA_FILE);
-        dataTimeList = new ArrayList<>(Arrays.asList(dataTimeArray));
+        dataFloatArray = Utils.readArrayFromFile(PATH_TO_DATA_FILE);
+        dataFloatList = new ArrayList<>(Arrays.asList());
     }
 
     /**
      * Виконує основнi операцiї з даними.
      * 
-     * Метод зчитує масив та список об'єктiв LocalDateTime з файлу, сортує їх та виконує пошук значення.
+     * Метод зчитує масив та список об'єктiв float з файлу, сортує їх та виконує пошук значення.
      */
     void doDataOperation() {
         // операцiї з масивом дати та часу
@@ -105,35 +105,35 @@ public class BasicDataOperationUsingList {
         findMinAndMaxInList();
 
         // записати вiдсортований масив в окремий файл
-        Utils.writeArrayToFile(dataTimeArray, PATH_TO_DATA_FILE + ".sorted");
+        Utils.writeArrayToFile(dataFloatArray, PATH_TO_DATA_FILE + ".sorted");
     }
 
     /**
-     * Сортує масив об'єктiв LocalDateTime та виводить початковий i вiдсортований масиви.
+     * Сортує масив об'єктiв float та виводить початковий i вiдсортований масиви.
      * Вимiрює та виводить час, витрачений на сортування масиву в наносекундах.
      */
     void sortArray() {
         long startTime = System.nanoTime();
 
-        Arrays.sort(dataTimeArray);
+        Arrays.sort(dataFloatArray);
 
-        Utils.printOperationDuration(startTime, "сортування масиву дати i часу");
+        Utils.printOperationDuration(startTime, "сортування масиву дійсних чисел");
     }
 
     /**
-     * Метод для пошуку значення в масивi дати i часу.
+     * Метод для пошуку значення в масивi .
      */
     void searchArray() {
         long startTime = System.nanoTime();
 
-        int index = Arrays.binarySearch(this.dataTimeArray, dataTimeValueToSearch);
+        int index = Arrays.binarySearch(this.dataFloatArray, dataFloatValueToSearch);
 
-        Utils.printOperationDuration(startTime, "пошук в масивi дати i часу");
+        Utils.printOperationDuration(startTime, "пошук в масивi ");
 
         if (index >= 0) {
-            System.out.println("Значення '" + dataTimeValueToSearch + "' знайдено в масивi за iндексом: " + index);
+            System.out.println("Значення '" + dataFloatValueToSearch + "' знайдено в масивi за iндексом: " + index);
         } else {
-            System.out.println("Значення '" + dataTimeValueToSearch + "' в масивi не знайдено.");
+            System.out.println("Значення '" + dataFloatValueToSearch + "' в масивi не знайдено.");
         }
     }
 
@@ -141,24 +141,24 @@ public class BasicDataOperationUsingList {
      * Знаходить мiнiмальне та максимальне значення в масивi дати i часу.
      */
     void findMinAndMaxInArray() {
-        if (dataTimeArray == null || dataTimeArray.length == 0) {
+        if (dataFloatArray == null || dataFloatArray.length == 0) {
             System.out.println("Масив порожнiй або не iнiцiалiзований.");
             return;
         }
 
         long startTime = System.nanoTime();
 
-        LocalDateTime min = dataTimeArray[0];
-        LocalDateTime max = dataTimeArray[0];
+        float min = dataFloatArray[0];
+        float max = dataFloatArray[0];
 
         Utils.printOperationDuration(startTime, "пошук мiнiмальної i максимальної дати i часу в масивi");
 
-        for (LocalDateTime dateTime : dataTimeArray) {
-            if (dateTime.isBefore(min)) {
-                min = dateTime;
+        for (float dataFloat : dataFloatArray) {
+            if (dataFloat.isBefore(min)) {
+                min = dataFloat;
             }
-            if (dateTime.isAfter(max)) {
-                max = dateTime;
+            if (dataFloat.isAfter(max)) {
+                max = dataFloat;
             }
         }
 
@@ -172,14 +172,14 @@ public class BasicDataOperationUsingList {
     void searchList() {
         long startTime = System.nanoTime();
 
-        int index = Collections.binarySearch(this.dataTimeList, dataTimeValueToSearch);
+        int index = Collections.binarySearch(this.dataFloatList, dataFloatValueToSearch);
 
         Utils.printOperationDuration(startTime, "пошук в ArrayList дати i часу");        
 
         if (index >= 0) {
-            System.out.println("Значення '" + dataTimeValueToSearch + "' знайдено в ArrayList за iндексом: " + index);
+            System.out.println("Значення '" + dataFloatValueToSearch + "' знайдено в ArrayList за iндексом: " + index);
         } else {
-            System.out.println("Значення '" + dataTimeValueToSearch + "' в ArrayList не знайдено.");
+            System.out.println("Значення '" + dataFloatValueToSearch + "' в ArrayList не знайдено.");
         }
     }
 
@@ -187,15 +187,15 @@ public class BasicDataOperationUsingList {
      * Знаходить мiнiмальне та максимальне значення в ArrayList дати i часу.
      */
     void findMinAndMaxInList() {
-        if (dataTimeList == null || dataTimeList.isEmpty()) {
+        if (dataFloatList == null || dataFloatList.isEmpty()) {
             System.out.println("ArrayList порожнiй або не iнiцiалiзований.");
             return;
         }
 
         long startTime = System.nanoTime();
 
-        LocalDateTime min = Collections.min(dataTimeList);
-        LocalDateTime max = Collections.max(dataTimeList);
+        float min = Collections.min(dataFloatList);
+        float max = Collections.max(dataFloatList);
 
         Utils.printOperationDuration(startTime, "пошук мiнiмальної i максимальної дати i часу в ArrayList");
 
@@ -204,20 +204,20 @@ public class BasicDataOperationUsingList {
     }
 
     /**
-     * Сортує ArrayList об'єктiв LocalDateTime та виводить початковий i вiдсортований списки.
+     * Сортує ArrayList об'єктiв float та виводить початковий i вiдсортований списки.
      * Вимiрює та виводить час, витрачений на сортування списку в наносекундах.
      */
     void sortList() {
         long startTime = System.nanoTime();
 
-        Collections.sort(dataTimeList);
+        Collections.sort(dataFloatList);
 
         Utils.printOperationDuration(startTime, "сортування ArrayList дати i часу");
     }
 }
 
 /**
- * Клас Utils мiститить допомiжнi методи для роботи з даними типу LocalDateTime.
+ * Клас Utils мiститить допомiжнi методи для роботи з даними типу float.
  */
 class Utils {
     /**
@@ -233,42 +233,41 @@ class Utils {
     }
 
     /**
-     * Зчитує масив об'єктiв LocalDateTime з файлу.
+     * Зчитує масив об'єктiв float з файлу.
      * 
      * @param pathToFile Шлях до файлу з даними.
-     * @return Масив об'єктiв LocalDateTime.
+     * @return Масив об'єктiв float.
      */
-    static LocalDateTime[] readArrayFromFile(String pathToFile) {
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
-        LocalDateTime[] tempArray = new LocalDateTime[1000];
+    static float[] readArrayFromFile(String pathToFile) {
+        float[] tempArray = new float[1000];
         int index = 0;
 
         try (BufferedReader br = new BufferedReader(new FileReader(pathToFile))) {
             String line;
             while ((line = br.readLine()) != null) {
-                LocalDateTime dateTime = LocalDateTime.parse(line, formatter);
-                tempArray[index++] = dateTime;
+                float dateFloat = Float.parseFloat(line);
+                tempArray[index++] = dateFloat;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        LocalDateTime[] finalArray = new LocalDateTime[index];
+        float[] finalArray = new float[index];
         System.arraycopy(tempArray, 0, finalArray, 0, index);
 
         return finalArray;
     }
 
     /**
-     * Записує масив об'єктiв LocalDateTime у файл.
+     * Записує масив об'єктiв float у файл.
      * 
-     * @param dataTimeArray Масив об'єктiв LocalDateTime.
+     * @param dataFloatArray Масив об'єктiв float.
      * @param pathToFile Шлях до файлу для запису.
      */
-    static void writeArrayToFile(LocalDateTime[] dataTimeArray, String pathToFile) {
+    static void writeArrayToFile(float[] dataFloatArray, String pathToFile) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathToFile))) {
-            for (LocalDateTime dateTime : dataTimeArray) {
-                writer.write(dateTime.toString());
+            for (float dataFloat : dataFloatArray) {
+                writer.write(dataFloat.toString());
                 writer.newLine();
             }
         } catch (IOException e) {
