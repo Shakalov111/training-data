@@ -3,7 +3,6 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.float;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,7 +51,7 @@ import java.util.List;
  * </pre>
  */
 public class BasicDataOperationUsingList {
-    static final String PATH_TO_DATA_FILE = "list/float.data";
+    static final String PATH_TO_DATA_FILE = "training-data\\list\\float.data";
 
     float dataFloatValueToSearch;
     float[] dataFloatArray;
@@ -77,8 +76,13 @@ public class BasicDataOperationUsingList {
         dataFloatValueToSearch = Float.parseFloat(searchValue);
 
         dataFloatArray = Utils.readArrayFromFile(PATH_TO_DATA_FILE);
-        dataFloatList = new ArrayList<>(Arrays.asList());
+        dataFloatList = new ArrayList<>(){{
+            for (float dataFloat : dataFloatArray) {
+                add(dataFloat);
+            }
+        }};
     }
+
 
     /**
      * Виконує основнi операцiї з даними.
@@ -105,7 +109,7 @@ public class BasicDataOperationUsingList {
         findMinAndMaxInList();
 
         // записати вiдсортований масив в окремий файл
-        Utils.writeArrayToFile(dataFloatArray, PATH_TO_DATA_FILE + ".sorted");
+        Utils.writeArrayToFile(dataFloatArray, PATH_TO_DATA_FILE + ".sorted");;
     }
 
     /**
@@ -154,10 +158,10 @@ public class BasicDataOperationUsingList {
         Utils.printOperationDuration(startTime, "пошук мiнiмальної i максимальної дати i часу в масивi");
 
         for (float dataFloat : dataFloatArray) {
-            if (dataFloat.isBefore(min)) {
+            if (min > dataFloat){
                 min = dataFloat;
             }
-            if (dataFloat.isAfter(max)) {
+            if (max < dataFloat){
                 max = dataFloat;
             }
         }
@@ -267,7 +271,7 @@ class Utils {
     static void writeArrayToFile(float[] dataFloatArray, String pathToFile) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathToFile))) {
             for (float dataFloat : dataFloatArray) {
-                writer.write(dataFloat.toString());
+                writer.write(dataFloat+"\n");
                 writer.newLine();
             }
         } catch (IOException e) {
