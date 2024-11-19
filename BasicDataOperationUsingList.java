@@ -178,7 +178,7 @@ public class BasicDataOperationUsingList {
 
         int index = Collections.binarySearch(this.dataFloatList, dataFloatValueToSearch);
 
-        Utils.printOperationDuration(startTime, "пошук в ArrayList дати i часу");        
+        Utils.printOperationDuration(startTime, "пошук в ArrayList дійсних чисел");        
 
         if (index >= 0) {
             System.out.println("Значення '" + dataFloatValueToSearch + "' знайдено в ArrayList за iндексом: " + index);
@@ -216,7 +216,7 @@ public class BasicDataOperationUsingList {
 
         Collections.sort(dataFloatList);
 
-        Utils.printOperationDuration(startTime, "сортування ArrayList дати i часу");
+        Utils.printOperationDuration(startTime, "сортування ArrayList дійсних чисел");
     }
 }
 
