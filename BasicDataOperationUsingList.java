@@ -50,7 +50,7 @@ import java.util.List;
  * </pre>
  */
 public class BasicDataOperationUsingList {
-    static final String PATH_TO_DATA_FILE = "list\\float.data";
+    static final String PATH_TO_DATA_FILE = "list/float.data";
 
     float dataFloatValueToSearch;
     float[] dataFloatArray;
@@ -90,12 +90,12 @@ public class BasicDataOperationUsingList {
      */
     void doDataOperation() {
         // операцiї з масивом дати та часу
-        sortArray();
+        
         searchArray();
         findMinAndMaxInArray();
 
         
-        
+        sortArray();
         searchArray();
         findMinAndMaxInArray();
 
