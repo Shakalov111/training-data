@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -119,7 +120,9 @@ public class BasicDataOperationUsingList {
     void sortArray() {
         long startTime = System.nanoTime();
 
-        Arrays.sort(dataFloatArray);
+           dataFloatArray = Arrays.stream(dataFloatArray)
+                              .sorted()
+                              .toArray(Float[]::new);
 
         Utils.printOperationDuration(startTime, "сортування масиву дійсних чисел");
     }
@@ -129,16 +132,14 @@ public class BasicDataOperationUsingList {
      */
     void searchArray() {
         long startTime = System.nanoTime();
+        boolean found = Arrays.stream(dataFloatArray)
+        .anyMatch(dataFloat -> dataFloat.equals(dataFloatValueToSearch));
 
-        int index = Arrays.binarySearch(this.dataFloatArray, dataFloatValueToSearch);
+        Utils.printOperationDuration(startTime, "пошук в масивi дати i часу");
 
-        Utils.printOperationDuration(startTime, "пошук в масивi ");
 
-        if (index >= 0) {
-            System.out.println("Значення '" + dataFloatValueToSearch + "' знайдено в масивi за iндексом: " + index);
-        } else {
-            System.out.println("Значення '" + dataFloatValueToSearch + "' в масивi не знайдено.");
-        }
+        System.out.println("Значення " + dataFloatValueToSearch + (found ? " знайдено" : " не знайдено") + " в масиві.");
+
     }
 
     /**
@@ -152,19 +153,15 @@ public class BasicDataOperationUsingList {
 
         long startTime = System.nanoTime();
 
-        Float min = dataFloatArray[0];
-        Float max = dataFloatArray[0];
+        Float min = Arrays.stream(dataFloatArray)
+        .min(Float::compareTo)
+        .orElse(null);
 
-        Utils.printOperationDuration(startTime, "пошук мінімального та максимального дійсного числа в масивi");
 
-        for (Float dataFloat : dataFloatArray) {
-            if (min > dataFloat){
-                min = dataFloat;
-            }
-            if (max < dataFloat){
-                max = dataFloat;
-            }
-        }
+        Float max = Arrays.stream(dataFloatArray)
+        .max(Float::compareTo)
+        .orElse(null);
+        
 
         System.out.println("Мiнiмальне значення в масивi: " + min);
         System.out.println("Максимальне значення в масивi: " + max);
@@ -176,7 +173,11 @@ public class BasicDataOperationUsingList {
     void searchList() {
         long startTime = System.nanoTime();
 
-        int index = Collections.binarySearch(this.dataFloatList, dataFloatValueToSearch);
+        int index = dataFloatList.stream()
+                    .filter(dataFloat -> dataFloat.equals(dataFloatValueToSearch))
+                    .findFirst()
+                    .map(dataFloatList::indexOf)
+                    .orElse(-1);
 
         Utils.printOperationDuration(startTime, "пошук в ArrayList дійсних чисел");        
 
