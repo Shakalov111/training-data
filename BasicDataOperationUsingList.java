@@ -3,11 +3,11 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Клас BasicDataOperationUsingList надає методи для виконання основних операцiй з даними типу Float.
@@ -132,18 +132,23 @@ public class BasicDataOperationUsingList {
      */
     void searchArray() {
         long startTime = System.nanoTime();
+        int index = dataFloatList.stream()
+        .filter(dataFloat -> dataFloat.equals(dataFloatValueToSearch))
+        .findFirst()
+        .map(dataFloatList::indexOf)
+        .orElse(-1);
         boolean found = Arrays.stream(dataFloatArray)
         .anyMatch(dataFloat -> dataFloat.equals(dataFloatValueToSearch));
 
-        Utils.printOperationDuration(startTime, "пошук в масивi дати i часу");
+        Utils.printOperationDuration(startTime, "пошук в масивi дійсних чисел");
 
 
-        System.out.println("Значення " + dataFloatValueToSearch + (found ? " знайдено" : " не знайдено") + " в масиві.");
+        System.out.println("Значення " + dataFloatValueToSearch + (found ? " знайдено" : " не знайдено") + " в масиві"+ "За індексом:"+ index);
 
     }
 
     /**
-     * Знаходить мiнiмальне та максимальне значення в масивi дати i часу.
+     * Знаходить мiнiмальне та максимальне значення в масивi дійсних чисел.
      */
     void findMinAndMaxInArray() {
         if (dataFloatArray == null || dataFloatArray.length == 0) {
@@ -168,7 +173,7 @@ public class BasicDataOperationUsingList {
     }
 
     /**
-     * Шукає задане значення дати i часу в ArrayList дати i часу.
+     * Шукає задане значення дійсних чисел в ArrayList дійсних чисел.
      */
     void searchList() {
         long startTime = System.nanoTime();
@@ -189,7 +194,7 @@ public class BasicDataOperationUsingList {
     }
 
     /**
-     * Знаходить мiнiмальне та максимальне значення в ArrayList дати i часу.
+     * Знаходить мiнiмальне та максимальне значення в ArrayList дійсних чисел.
      */
     void findMinAndMaxInList() {
         if (dataFloatList == null || dataFloatList.isEmpty()) {
@@ -199,8 +204,14 @@ public class BasicDataOperationUsingList {
 
         long startTime = System.nanoTime();
 
-        Float min = Collections.min(dataFloatList);
-        Float max = Collections.max(dataFloatList);
+        Float min = dataFloatList.stream()
+        .min(Float::compareTo)
+        .orElse(null);
+
+
+        Float max = dataFloatList.stream()
+        .max(Float::compareTo)
+        .orElse(null);
 
         Utils.printOperationDuration(startTime, "пошук мінімального та максимального дійсного числа в списку");
 
@@ -215,7 +226,10 @@ public class BasicDataOperationUsingList {
     void sortList() {
         long startTime = System.nanoTime();
 
-        Collections.sort(dataFloatList);
+        dataFloatList = dataFloatList.stream()
+        .sorted()
+        .collect(Collectors.toList());
+
 
         Utils.printOperationDuration(startTime, "сортування ArrayList дійсних чисел");
     }
