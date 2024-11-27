@@ -140,7 +140,7 @@ public class BasicDataOperationUsingList {
         Utils.printOperationDuration(startTime, "пошук в масивi дійсних чисел");
 
 
-        System.out.println("Значення " + dataFloatValueToSearch + (found ? " знайдено" : " не знайдено") + " в масиві"+ "За індексом:");
+        System.out.println("Значення " + dataFloatValueToSearch + (found ? " знайдено" : " не знайдено") + " в масиві");
 
     }
 
