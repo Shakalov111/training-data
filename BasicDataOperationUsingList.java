@@ -125,6 +125,7 @@ public class BasicDataOperationUsingList {
                               .toArray(Float[]::new);
 
         Utils.printOperationDuration(startTime, "сортування масиву дійсних чисел");
+        System.out.println(Arrays.toString(dataFloatArray));
     }
 
     /**
@@ -132,18 +133,14 @@ public class BasicDataOperationUsingList {
      */
     void searchArray() {
         long startTime = System.nanoTime();
-        int index = dataFloatList.stream()
-        .filter(dataFloat -> dataFloat.equals(dataFloatValueToSearch))
-        .findFirst()
-        .map(dataFloatList::indexOf)
-        .orElse(-1);
+
         boolean found = Arrays.stream(dataFloatArray)
         .anyMatch(dataFloat -> dataFloat.equals(dataFloatValueToSearch));
 
         Utils.printOperationDuration(startTime, "пошук в масивi дійсних чисел");
 
 
-        System.out.println("Значення " + dataFloatValueToSearch + (found ? " знайдено" : " не знайдено") + " в масиві"+ "За індексом:"+ index);
+        System.out.println("Значення " + dataFloatValueToSearch + (found ? " знайдено" : " не знайдено") + " в масиві"+ "За індексом:");
 
     }
 
@@ -170,6 +167,7 @@ public class BasicDataOperationUsingList {
 
         System.out.println("Мiнiмальне значення в масивi: " + min);
         System.out.println("Максимальне значення в масивi: " + max);
+        Utils.printOperationDuration(startTime, "пошук мінімального та максимального дійсного числа в масиві");
     }
 
     /**
