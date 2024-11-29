@@ -3,7 +3,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -75,7 +75,7 @@ public class BasicDataOperationUsingList {
         dataFloatValueToSearch = Float.parseFloat(searchValue);
 
         dataFloatArray = Utils.readArrayFromFile(PATH_TO_DATA_FILE);
-        dataFloatList = new ArrayList<>(){{
+        dataFloatList = new LinkedList<>(){{
             for (float dataFloat : dataFloatArray) {
                 add(dataFloat);
             }
@@ -99,7 +99,7 @@ public class BasicDataOperationUsingList {
         searchArray();
         findMinAndMaxInArray();
 
-        // операцiї з ArrayList
+        // операцiї з LinkedList
         searchList();
         findMinAndMaxInList();
 
@@ -171,28 +171,28 @@ public class BasicDataOperationUsingList {
     }
 
     /**
-     * Шукає задане значення дати i часу в ArrayList дати i часу.
+     * Шукає задане значення дати i часу в LinkedList дати i часу.
      */
     void searchList() {
         long startTime = System.nanoTime();
 
         int index = Collections.binarySearch(this.dataFloatList, dataFloatValueToSearch);
 
-        Utils.printOperationDuration(startTime, "пошук в ArrayList дійсних чисел");        
+        Utils.printOperationDuration(startTime, "пошук в LinkedList дійсних чисел");        
 
         if (index >= 0) {
-            System.out.println("Значення '" + dataFloatValueToSearch + "' знайдено в ArrayList за iндексом: " + index);
+            System.out.println("Значення '" + dataFloatValueToSearch + "' знайдено в LinkedList за iндексом: " + index);
         } else {
-            System.out.println("Значення '" + dataFloatValueToSearch + "' в ArrayList не знайдено.");
+            System.out.println("Значення '" + dataFloatValueToSearch + "' в LinkedList не знайдено.");
         }
     }
 
     /**
-     * Знаходить мiнiмальне та максимальне значення в ArrayList дати i часу.
+     * Знаходить мiнiмальне та максимальне значення в LinkedList дати i часу.
      */
     void findMinAndMaxInList() {
         if (dataFloatList == null || dataFloatList.isEmpty()) {
-            System.out.println("ArrayList порожнiй або не iнiцiалiзований.");
+            System.out.println("LinkedList порожнiй або не iнiцiалiзований.");
             return;
         }
 
@@ -203,12 +203,12 @@ public class BasicDataOperationUsingList {
 
         Utils.printOperationDuration(startTime, "пошук мінімального та максимального дійсного числа в списку");
 
-        System.out.println("Мiнiмальне значення в ArrayList: " + min);
-        System.out.println("Максимальне значення в ArrayList: " + max);
+        System.out.println("Мiнiмальне значення в LinkedList: " + min);
+        System.out.println("Максимальне значення в LinkedList: " + max);
     }
 
     /**
-     * Сортує ArrayList об'єктiв float та виводить початковий i вiдсортований списки.
+     * Сортує LinkedList об'єктiв float та виводить початковий i вiдсортований списки.
      * Вимiрює та виводить час, витрачений на сортування списку в наносекундах.
      */
     void sortList() {
@@ -216,7 +216,7 @@ public class BasicDataOperationUsingList {
 
         Collections.sort(dataFloatList);
 
-        Utils.printOperationDuration(startTime, "сортування ArrayList дійсних чисел");
+        Utils.printOperationDuration(startTime, "сортування LinkedList дійсних чисел");
     }
 }
 
