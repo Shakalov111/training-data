@@ -9,20 +9,20 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Клас BasicDataOperationUsingList надає методи для виконання основних операцiй з даними типу float.
+ * Клас BasicDataOperationUsingList надає методи для виконання основних операцiй з даними типу Float.
  * 
- * <p>Цей клас зчитує данi з файлу "list/float.data", сортує їх та виконує пошук значення в масивi та списку.</p>
+ * <p>Цей клас зчитує данi з файлу "list/Float.data", сортує їх та виконує пошук значення в масивi та списку.</p>
  * 
  * <p>Основнi методи:</p>
  * <ul>
  *   <li>{@link #main(String[])} - Точка входу в програму.</li>
  *   <li>{@link #doDataOperation()} - Виконує основнi операцiї з даними.</li>
- *   <li>{@link #sortArray()} - Сортує масив float.</li>
- *   <li>{@link #searchArray()} - Виконує пошук значення в масивi float.</li>
- *   <li>{@link #findMinAndMaxInArray()} - Знаходить мiнiмальне та максимальне значення в масивi float.</li>
- *   <li>{@link #sortList()} - Сортує список float.</li>
- *   <li>{@link #searchList()} - Виконує пошук значення в списку float.</li>
- *   <li>{@link #findMinAndMaxInList()} - Знаходить мiнiмальне та максимальне значення в списку float.</li>
+ *   <li>{@link #sortArray()} - Сортує масив Float.</li>
+ *   <li>{@link #searchArray()} - Виконує пошук значення в масивi Float.</li>
+ *   <li>{@link #findMinAndMaxInArray()} - Знаходить мiнiмальне та максимальне значення в масивi Float.</li>
+ *   <li>{@link #sortList()} - Сортує список Float.</li>
+ *   <li>{@link #searchList()} - Виконує пошук значення в списку Float.</li>
+ *   <li>{@link #findMinAndMaxInList()} - Знаходить мiнiмальне та максимальне значення в списку Float.</li>
  * </ul>
  * 
  * <p>Конструктор:</p>
@@ -37,9 +37,9 @@ import java.util.List;
  * 
  * <p>Змiннi екземпляра:</p>
  * <ul>
- *   <li>{@link #dataFloatValueToSearch} - Значення float для пошуку.</li>
- *   <li>{@link #dataFloatArray} - Масив float.</li>
- *   <li>{@link #dataFloatList} - Список float.</li>
+ *   <li>{@link #dataFloatValueToSearch} - Значення Float для пошуку.</li>
+ *   <li>{@link #dataFloatArray} - Масив Float.</li>
+ *   <li>{@link #dataFloatList} - Список Float.</li>
  * </ul>
  * 
  * <p>Приклад використання:</p>
@@ -52,8 +52,8 @@ import java.util.List;
 public class BasicDataOperationUsingList {
     static final String PATH_TO_DATA_FILE = "list/float.data";
 
-    float dataFloatValueToSearch;
-    float[] dataFloatArray;
+    Float dataFloatValueToSearch;
+    Float[] dataFloatArray;
     LinkedList<Float> dataFloatList;
 
     public static void main(String[] args) {  
@@ -76,7 +76,7 @@ public class BasicDataOperationUsingList {
 
         dataFloatArray = Utils.readArrayFromFile(PATH_TO_DATA_FILE);
         dataFloatList = new LinkedList<>(){{
-            for (float dataFloat : dataFloatArray) {
+            for (Float dataFloat : dataFloatArray) {
                 add(dataFloat);
             }
         }};
@@ -86,7 +86,7 @@ public class BasicDataOperationUsingList {
     /**
      * Виконує основнi операцiї з даними.
      * 
-     * Метод зчитує масив та список об'єктiв float з файлу, сортує їх та виконує пошук значення.
+     * Метод зчитує масив та список об'єктiв Float з файлу, сортує їх та виконує пошук значення.
      */
     void doDataOperation() {
         // операцiї з масивом 
@@ -113,13 +113,13 @@ public class BasicDataOperationUsingList {
     }
 
     /**
-     * Сортує масив об'єктiв float та виводить початковий i вiдсортований масиви.
+     * Сортує масив об'єктiв Float та виводить початковий i вiдсортований масиви.
      * Вимiрює та виводить час, витрачений на сортування масиву в наносекундах.
      */
     void sortArray() {
         long startTime = System.nanoTime();
 
-        Arrays.sort(dataFloatArray);
+        Arrays.sort(dataFloatArray , Collections.reverseOrder());
 
         Utils.printOperationDuration(startTime, "сортування масиву дійсних чисел");
     }
@@ -142,7 +142,7 @@ public class BasicDataOperationUsingList {
     }
 
     /**
-     * Знаходить мiнiмальне та максимальне значення в масивi float.
+     * Знаходить мiнiмальне та максимальне значення в масивi Float.
      */
     void findMinAndMaxInArray() {
         if (dataFloatArray == null || dataFloatArray.length == 0) {
@@ -152,12 +152,12 @@ public class BasicDataOperationUsingList {
 
         long startTime = System.nanoTime();
 
-        float min = dataFloatArray[0];
-        float max = dataFloatArray[0];
+        Float min = dataFloatArray[0];
+        Float max = dataFloatArray[0];
 
         Utils.printOperationDuration(startTime, "пошук мінімального та максимального дійсного числа в масивi");
 
-        for (float dataFloat : dataFloatArray) {
+        for (Float dataFloat : dataFloatArray) {
             if (min > dataFloat){
                 min = dataFloat;
             }
@@ -171,7 +171,7 @@ public class BasicDataOperationUsingList {
     }
 
     /**
-     * Шукає задане значення float в LinkedList float.
+     * Шукає задане значення Float в LinkedList Float.
      */
     void searchList() {
         long startTime = System.nanoTime();
@@ -188,7 +188,7 @@ public class BasicDataOperationUsingList {
     }
 
     /**
-     * Знаходить мiнiмальне та максимальне значення в LinkedList float.
+     * Знаходить мiнiмальне та максимальне значення в LinkedList Float.
      */
     void findMinAndMaxInList() {
         if (dataFloatList == null || dataFloatList.isEmpty()) {
@@ -198,8 +198,8 @@ public class BasicDataOperationUsingList {
 
         long startTime = System.nanoTime();
 
-        float min = Collections.min(dataFloatList);
-        float max = Collections.max(dataFloatList);
+        Float min = Collections.min(dataFloatList);
+        Float max = Collections.max(dataFloatList);
 
         Utils.printOperationDuration(startTime, "пошук мінімального та максимального дійсного числа в списку");
 
@@ -208,20 +208,20 @@ public class BasicDataOperationUsingList {
     }
 
     /**
-     * Сортує LinkedList об'єктiв float та виводить початковий i вiдсортований списки.
+     * Сортує LinkedList об'єктiв Float та виводить початковий i вiдсортований списки.
      * Вимiрює та виводить час, витрачений на сортування списку в наносекундах.
      */
     void sortList() {
         long startTime = System.nanoTime();
 
-        Collections.sort(dataFloatList);
+        Collections.sort(dataFloatList, Collections.reverseOrder());
 
         Utils.printOperationDuration(startTime, "сортування LinkedList дійсних чисел");
     }
 }
 
 /**
- * Клас Utils мiститить допомiжнi методи для роботи з даними типу float.
+ * Клас Utils мiститить допомiжнi методи для роботи з даними типу Float.
  */
 class Utils {
     /**
@@ -237,40 +237,40 @@ class Utils {
     }
 
     /**
-     * Зчитує масив об'єктiв float з файлу.
+     * Зчитує масив об'єктiв Float з файлу.
      * 
      * @param pathToFile Шлях до файлу з даними.
-     * @return Масив об'єктiв float.
+     * @return Масив об'єктiв Float.
      */
-    static float[] readArrayFromFile(String pathToFile) {
-        float[] tempArray = new float[1000];
+    static Float[] readArrayFromFile(String pathToFile) {
+        Float[] tempArray = new Float[1000];
         int index = 0;
 
         try (BufferedReader br = new BufferedReader(new FileReader(pathToFile))) {
             String line;
             while ((line = br.readLine()) != null) {
-                float dateFloat = Float.parseFloat(line);
+                Float dateFloat = Float.parseFloat(line);
                 tempArray[index++] = dateFloat;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        float[] finalArray = new float[index];
+        Float[] finalArray = new Float[index];
         System.arraycopy(tempArray, 0, finalArray, 0, index);
 
         return finalArray;
     }
 
     /**
-     * Записує масив об'єктiв float у файл.
+     * Записує масив об'єктiв Float у файл.
      * 
-     * @param dataFloatArray Масив об'єктiв float.
+     * @param dataFloatArray Масив об'єктiв Float.
      * @param pathToFile Шлях до файлу для запису.
      */
-    static void writeArrayToFile(float[] dataFloatArray, String pathToFile) {
+    static void writeArrayToFile(Float[] dataFloatArray, String pathToFile) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathToFile))) {
-            for (float dataFloat : dataFloatArray) {
+            for (Float dataFloat : dataFloatArray) {
                 writer.write(dataFloat+" ");
                 writer.newLine();
             }
